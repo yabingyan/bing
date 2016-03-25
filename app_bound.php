@@ -77,7 +77,7 @@ if(!isset($_SERVER["HTTP_JSSID"])){
 	{
 		$rst .= $str[$i].'&';
 	}
-	$secret="secret=753159842564855248546518489789";
+	$secret="secret=yabingyan";
 	$rst .= $secret;//字符串连接成功
 	#logger($rst."签名啦啦啦");
 
@@ -89,15 +89,12 @@ if(!isset($_SERVER["HTTP_JSSID"])){
 
 	$request['from_app'] = 1;
 	
-	if(strcmp($sign,$serverSign))
-	{
+	if(strcmp($sign,$serverSign)){
 		$state = "签名错啦,请查看是否有参数是中文，且没有用url_encode编码";
 		$arr['state'] = $state;
 		
 		logger('签名错啦,请查看是否有参数是中文，且没有用url_encode编码');
-	}
-	else
-	{
+	}else{
 		//$ip = $_SERVER["REMOTE_ADDR"];
 		//echo "您的IP为".$ip;
 		include_once($method.".php");

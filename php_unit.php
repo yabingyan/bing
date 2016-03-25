@@ -26,19 +26,22 @@ $arr['appkey'] = "001";
 $arr['sn'] = "89860089261479375945";
 $arr['timestamp'] = time();
 $arr['rtimes'] = "1";
-$arr['method'] = "get_checknum";
-$arr['request'] = $_POST;
+$arr['method'] = $_POST['method'];
+//$arr['request'] = $_POST;
 
 // var_dump($arr);
 
 //生成sign
 
 $request = $_POST;
+unset($request['method']);
 var_dump($request);
 foreach ($request as $key => $value) {
 	$request[$key] = urlencode($value);
 }
-var_dump($request);die;
+var_dump($request);
+$arr['request'] = $request;
+
 $keys1 = array_keys($arr);
 $values1 = array_values($arr);
 $count1 = count($keys1);
@@ -68,7 +71,7 @@ $rst = "";
 for($i = 0; $i < $j; $i ++)	{
 	$rst .= $str[$i].'&';
 }
-$secret="secret=753159842564855248546518489789";
+$secret="secret=yabingyan";
 $rst .= $secret;//字符串连接成功
 
 $arr['sign'] = md5($rst);
@@ -81,7 +84,8 @@ $_POST['jsonStr'] = $jsonStr;
 
 var_dump($_POST);
 
-
+$HTTP_RAW_POST_DATA = $jsonStr;
+include("./app_bound.php");
 
 
 ?>
